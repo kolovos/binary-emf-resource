@@ -1,0 +1,5 @@
+*.xmi
+*.ecore
+*.bin
+*.ebin
+/bin/

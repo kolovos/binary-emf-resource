@@ -1,6 +1,7 @@
 package io.dimitris.emf.binary;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -31,12 +32,12 @@ public class BinaryResource extends ResourceImpl {
 	public static void main(String[] args) throws Exception {
 		
 		ResourceSet resourceSet = new ResourceSetImpl();
-		EmfUtil.register(URI.createFileURI("/Users/dkolovos/Projects/Eclipse/eclipse-modeling-luna/workspace/org.eclipse.epsilon.emf.binary/JDTAST.ecore"), resourceSet.getPackageRegistry());
+		EmfUtil.register(URI.createFileURI(new File("JDTAST.ecore").getAbsolutePath()), resourceSet.getPackageRegistry());
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl());
-		org.eclipse.emf.ecore.resource.Resource set0 = resourceSet.createResource(URI.createFileURI("/Users/dkolovos/Projects/Eclipse/eclipse-modeling-luna/workspace/org.eclipse.epsilon.emf.binary/set0.xmi"));
+		org.eclipse.emf.ecore.resource.Resource set0 = resourceSet.createResource(URI.createFileURI(new File("set0.xmi").getAbsolutePath()));
 		set0.load(null);
 		
-		BinaryResourceImpl competition = new BinaryResourceImpl(URI.createFileURI("/Users/dkolovos/Projects/Eclipse/eclipse-modeling-luna/workspace/org.eclipse.epsilon.emf.binary/set0.bin"));
+		BinaryResourceImpl competition = new BinaryResourceImpl(URI.createFileURI(new File("set0.bin").getAbsolutePath()));
 		competition.getContents().add(set0.getContents().get(0));
 		Stopwatch stopwatch = new Stopwatch();
 		stopwatch.resume();
@@ -44,7 +45,7 @@ public class BinaryResource extends ResourceImpl {
 		stopwatch.pause();
 		System.out.println(stopwatch.getElapsed());
 		
-		BinaryResource resource = new BinaryResource(URI.createFileURI("/Users/dkolovos/Projects/Eclipse/eclipse-modeling-luna/workspace/org.eclipse.epsilon.emf.binary/set0.ebin"));
+		BinaryResource resource = new BinaryResource(URI.createFileURI(new File("set0.ebin").getAbsolutePath()));
 		resource.getContents().add(competition.getContents().get(0));
 		stopwatch.resume();
 		resource.save(null);
